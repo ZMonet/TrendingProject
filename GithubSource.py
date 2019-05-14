@@ -97,7 +97,7 @@ def scrape(language, filename):
 def job():
 
     strdate = datetime.datetime.now().strftime('%Y-%m-%d')
-    filename = '{date}.txt'.format(date=strdate)
+    filename = '{date}.md'.format(date=strdate)
 
     # create markdown file
     createMarkdown(strdate, filename)
