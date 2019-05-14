@@ -67,7 +67,7 @@ def scrape(language, filename):
         'Accept-Language'	: 'zh-CN,zh;q=0.8'
     }
 
-    url = 'https://github.com/trending/{language}?since=weekly'.format(language=language)
+    url = 'https://github.com/trending/{language}?since=monthly'.format(language=language)
     r = requests.get(url, headers=HEADERS,proxies=proxies)
 
     assert r.status_code == 200
