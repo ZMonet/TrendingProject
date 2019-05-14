@@ -67,7 +67,7 @@ def scrape(language, filename):
         'Accept-Language'	: 'zh-CN,zh;q=0.8'
     }
 
-    url = 'https://github.com/trending/{language}?since=weekly'.format(language=language)
+    url = 'https://github.com/trending/{language}?since=daily'.format(language=language)
     r = requests.get(url, headers=HEADERS,proxies=proxies)
 
     assert r.status_code == 200
@@ -97,7 +97,7 @@ def scrape(language, filename):
 def job():
 
     strdate = datetime.datetime.now().strftime('%Y-%m-%d')
-    filename = '{date}.md'.format(date=strdate)
+    filename = '{date}.txt'.format(date=strdate)
 
     # create markdown file
     createMarkdown(strdate, filename)
