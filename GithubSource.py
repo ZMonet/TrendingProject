@@ -51,7 +51,7 @@ def createMarkdown(date, filename):
 
 
 #根据语言来爬取数据（C++,Python等）
-def scrape(language, filename):
+def scrape(language, filename,trending):
 
     ip_url = 'http://www.xicidaili.com/nn/'
     headers = {
@@ -67,7 +67,7 @@ def scrape(language, filename):
         'Accept-Language'	: 'zh-CN,zh;q=0.8'
     }
 
-    url = 'https://github.com/trending/{language}?since=daily'.format(language=language)
+    url = 'https://github.com/trending/{language}?since={trending}'.format(language=language,trending=trending)
     r = requests.get(url, headers=HEADERS,proxies=proxies)
 
     assert r.status_code == 200
@@ -97,17 +97,21 @@ def scrape(language, filename):
 def job():
 
     strdate = datetime.datetime.now().strftime('%Y-%m-%d')
-    filename = '{date}.md'.format(date=strdate)
 
-    # create markdown file
-    createMarkdown(strdate, filename)
+    # daily
+    filename_daily = '{date}-daily.md'.format(date=strdate)
+    createMarkdown(strdate, filename_daily)
+    scrape('python', filename_daily, 'daily')
+    scrape('java', filename_daily, 'daily')
+    git_add_commit_push(strdate, filename_daily)
 
-    # write markdown
-    scrape('python', filename)
-    scrape('java', filename)
 
-    # git add commit push
-    git_add_commit_push(strdate, filename)
+    # weekly
+    filename_weekly= '{date}-weekly.md'.format(date=strdate)
+    createMarkdown(strdate,filename_weekly)
+    scrape('python', filename_weekly, 'weekly')
+    scrape('java', filename_weekly, 'weekly')
+    git_add_commit_push(strdate, filename_weekly)
 
 
 if __name__ == '__main__':
