@@ -100,20 +100,27 @@ def job():
 
     strdate = datetime.datetime.now().strftime('%Y-%m-%d')
 
-    # daily
-    filename_daily = '{date}-daily.md'.format(date=strdate)
-    createMarkdown(strdate, filename_daily)
-    scrape('python', filename_daily, 'daily')
-    scrape('java', filename_daily, 'daily')
-    git_add_commit_push(strdate, filename_daily)
+    # # daily
+    # filename_daily = '{date}-daily.md'.format(date=strdate)
+    # createMarkdown(strdate, filename_daily)
+    # scrape('python', filename_daily, 'daily')
+    # scrape('java', filename_daily, 'daily')
+    # git_add_commit_push(strdate, filename_daily)
+    #
+    #
+    # # weekly
+    # filename_weekly= '{date}-weekly.md'.format(date=strdate)
+    # createMarkdown(strdate,filename_weekly)
+    # scrape('python', filename_weekly, 'weekly')
+    # scrape('java', filename_weekly, 'weekly')
+    # git_add_commit_push(strdate, filename_weekly)
 
-
-    # weekly
-    filename_weekly= '{date}-weekly.md'.format(date=strdate)
-    createMarkdown(strdate,filename_weekly)
-    scrape('python', filename_weekly, 'weekly')
-    scrape('java', filename_weekly, 'weekly')
-    git_add_commit_push(strdate, filename_weekly)
+    # monthly
+    filename_monthly = '{date}-monthly.md'.format(date=strdate)
+    createMarkdown(strdate, filename_monthly)
+    scrape('python', filename_monthly, 'monthly')
+    scrape('java', filename_monthly, 'monthly')
+    git_add_commit_push(strdate, filename_monthly)
 
 
 if __name__ == '__main__':
