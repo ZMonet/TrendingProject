@@ -1,4 +1,4 @@
-#!/usr/local/bin/python2.7
+#定期爬取GitHub热门项目
 # coding:utf-8
 from bs4 import BeautifulSoup
 import random
@@ -32,14 +32,12 @@ def get_random_ip(ip_list):
 
 #把爬下来的项目上传到自己的GitHub
 def git_add_commit_push(date, filename):
-    cmd_cd='cd daily'
     cmd_git_add = 'git add .'
     cmd_git_commit = 'git commit -m "{date}"'.format(date=date)
     cmd_git_push = 'git push -u origin master'
 
     # os.system函数可以将字符串转化成命令在服务器上运行；其原理是每一条system函数执行时，
     # 其会创建一个子进程在系统上执行命令行，子进程的执行结果无法影响主进程；
-    os.system(cmd_cd)
     os.system(cmd_git_add)
     os.system(cmd_git_commit)
     os.system(cmd_git_push)
@@ -100,20 +98,20 @@ def job():
 
     strdate = datetime.datetime.now().strftime('%Y-%m-%d')
 
-    # # daily
-    # filename_daily = '{date}-daily.md'.format(date=strdate)
-    # createMarkdown(strdate, filename_daily)
-    # scrape('python', filename_daily, 'daily')
-    # scrape('java', filename_daily, 'daily')
-    # git_add_commit_push(strdate, filename_daily)
-    #
-    #
-    # # weekly
-    # filename_weekly= '{date}-weekly.md'.format(date=strdate)
-    # createMarkdown(strdate,filename_weekly)
-    # scrape('python', filename_weekly, 'weekly')
-    # scrape('java', filename_weekly, 'weekly')
-    # git_add_commit_push(strdate, filename_weekly)
+    # daily
+    filename_daily = '{date}-daily.md'.format(date=strdate)
+    createMarkdown(strdate, filename_daily)
+    scrape('python', filename_daily, 'daily')
+    scrape('java', filename_daily, 'daily')
+    git_add_commit_push(strdate, filename_daily)
+
+
+    # weekly
+    filename_weekly= '{date}-weekly.md'.format(date=strdate)
+    createMarkdown(strdate,filename_weekly)
+    scrape('python', filename_weekly, 'weekly')
+    scrape('java', filename_weekly, 'weekly')
+    git_add_commit_push(strdate, filename_weekly)
 
     # monthly
     filename_monthly = '{date}-monthly.md'.format(date=strdate)
