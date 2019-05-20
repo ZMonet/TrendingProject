@@ -32,12 +32,14 @@ def get_random_ip(ip_list):
 
 #把爬下来的项目上传到自己的GitHub
 def git_add_commit_push(date, filename):
+    cmd_cd='cd daily'
     cmd_git_add = 'git add .'
     cmd_git_commit = 'git commit -m "{date}"'.format(date=date)
     cmd_git_push = 'git push -u origin master'
 
     # os.system函数可以将字符串转化成命令在服务器上运行；其原理是每一条system函数执行时，
     # 其会创建一个子进程在系统上执行命令行，子进程的执行结果无法影响主进程；
+    os.system(cmd_cd)
     os.system(cmd_git_add)
     os.system(cmd_git_commit)
     os.system(cmd_git_push)
