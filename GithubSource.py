@@ -1,4 +1,3 @@
-#定期爬取GitHub热门项目
 # coding:utf-8
 from bs4 import BeautifulSoup
 import random
@@ -9,6 +8,7 @@ import os
 import time
 from pyquery import PyQuery as pq
 
+    ###定期爬取GitHub热门项目 ###
 
 def get_ip_list(url, headers):
     web_data = requests.get(url, headers=headers)
