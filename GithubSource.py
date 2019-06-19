@@ -10,6 +10,7 @@ from pyquery import PyQuery as pq
 
     ###定期爬取GitHub热门项目 ###
 
+#爬取免费代理ip
 def get_ip_list(url, headers):
     web_data = requests.get(url, headers=headers)
     soup = BeautifulSoup(web_data.text, 'lxml')
@@ -21,6 +22,7 @@ def get_ip_list(url, headers):
         ip_list.append(tds[1].text + ':' + tds[2].text)
     return ip_list
 
+#随机选取一个可以代理ip
 def get_random_ip(ip_list):
     proxy_list = []
     for ip in ip_list:
@@ -94,6 +96,7 @@ def scrape(language, filename,trending):
         f.flush()
 
 
+#主函数
 def job():
 
     strdate = datetime.datetime.now().strftime('%Y-%m-%d')
